@@ -5,6 +5,7 @@ import com.gabrielmedeiros.pokeapp.data.repository.PokeRepositoryImpl
 import com.gabrielmedeiros.pokeapp.data.source.ApiRemoteDataSource
 import com.gabrielmedeiros.pokeapp.domain.usecase.GetPokemonListUseCase
 import com.gabrielmedeiros.pokeapp.ui.main.MainViewModel
+import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.bind
@@ -14,7 +15,7 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-private const val BASE_URL = ""
+private const val BASE_URL = "https://pokeapi.co/api/v2/"
 
 private val viewModelModule = module {
     viewModelOf(::MainViewModel)
@@ -34,6 +35,10 @@ private val networkModule = module {
     singleOf(::provideOkHttpClient)
 }
 
+private val dispatchersKoinModule = module {
+    single { Dispatchers.IO }
+}
+
 private fun provideOkHttpClient(): OkHttpClient {
     return OkHttpClient.Builder().build()
 }
@@ -51,6 +56,7 @@ val pokeAppModules = module {
         viewModelModule,
         domainModule,
         dataModule,
-        networkModule
+        networkModule,
+        dispatchersKoinModule
     )
 }
