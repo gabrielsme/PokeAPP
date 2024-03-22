@@ -6,11 +6,12 @@ import com.gabrielmedeiros.pokeapp.domain.usecase.GetPokemonListUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class ListPokemonViewModel(
-    private val getPokemonListUseCase: GetPokemonListUseCase
+    private val getPokemonListUseCase: GetPokemonListUseCase,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(ListPokemonUiState())
@@ -20,9 +21,8 @@ class ListPokemonViewModel(
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
 
-            getPokemonListUseCase().collect { result ->
-                result.results.forEach { it.getImageUrl() }
-                _uiState.update { it.copy(pokemons = result.results, isLoading = false) }
+            getPokemonListUseCase().collectLatest { result ->
+                _uiState.update { it.copy(pokemons = result, isLoading = false) }
             }
         }
     }

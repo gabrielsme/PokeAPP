@@ -23,23 +23,31 @@ class ListPokemonFragment : Fragment(R.layout.adapter_list_pokemon) {
     private var binding: FragmentListPokemonBinding? = null
     private val viewModel by viewModel<ListPokemonViewModel>()
 
+    private var adapter: ListPokemonAdapter? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentListPokemonBinding.inflate(layoutInflater, container, false)
+        return binding?.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        adapter = ListPokemonAdapter(::onClickPokemonItem)
         binding?.list?.layoutManager = GridLayoutManager(context, COLUMN_COUNT)
+        binding?.list?.adapter = adapter
 
         setupObservers()
 
         viewModel.listPokemon()
-
-        return binding?.root
     }
 
     override fun onDestroyView() {
         binding = null
+        adapter = null
 
         super.onDestroyView()
     }
@@ -48,7 +56,9 @@ class ListPokemonFragment : Fragment(R.layout.adapter_list_pokemon) {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { uiState ->
-                    binding?.list?.adapter = ListPokemonAdapter(uiState.pokemons, ::onClickPokemonItem)
+                    uiState.pokemons?.let { pokemons ->
+                        adapter?.submitData(pokemons)
+                    }
                 }
             }
         }

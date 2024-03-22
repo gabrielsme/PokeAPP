@@ -1,5 +1,6 @@
 package com.gabrielmedeiros.pokeapp.di
 
+import com.gabrielmedeiros.pokeapp.data.pagination.ListPokemonPagingSource
 import com.gabrielmedeiros.pokeapp.data.repository.PokeRepository
 import com.gabrielmedeiros.pokeapp.data.repository.PokeRepositoryImpl
 import com.gabrielmedeiros.pokeapp.data.source.ApiRemoteDataSource
@@ -27,6 +28,7 @@ private val domainModule = module {
 
 private val dataModule = module {
     singleOf(::PokeRepositoryImpl) { bind<PokeRepository>() }
+    singleOf(::ListPokemonPagingSource)
 }
 
 private val networkModule = module {

@@ -1,8 +1,9 @@
 package com.gabrielmedeiros.pokeapp.data.repository
 
-import com.gabrielmedeiros.pokeapp.data.model.ListPokemonResultsPage
+import androidx.paging.PagingData
+import com.gabrielmedeiros.pokeapp.data.model.ListPokemonModel
 import kotlinx.coroutines.flow.Flow
 
 interface PokeRepository {
-    suspend fun listPokemon(): Flow<ListPokemonResultsPage>
+    suspend fun listPokemon(): Flow<PagingData<ListPokemonModel>>
 }
