@@ -1,14 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.main.detailpokemon.DetailPokemonFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:maxLines="1"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.Material3.DisplayMedium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Charizard" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                app:layout_constraintEnd_toStartOf="@+id/height"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/name"
+                tools:text="56" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                app:layout_constraintEnd_toStartOf="@+id/weight"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/id"
+                app:layout_constraintTop_toTopOf="@+id/id"
+                tools:text="100" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/height_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/height_unit"
+                android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                app:layout_constraintBaseline_toBaselineOf="@+id/height"
+                app:layout_constraintStart_toEndOf="@+id/height" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                app:layout_constraintEnd_toStartOf="@+id/base_experience"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/height"
+                app:layout_constraintTop_toTopOf="@+id/height"
+                tools:text="200" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/weight_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/weight_unit"
+                android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                app:layout_constraintBaseline_toBaselineOf="@+id/weight"
+                app:layout_constraintStart_toEndOf="@+id/weight" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/base_experience"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/weight"
+                app:layout_constraintTop_toTopOf="@+id/weight"
+                tools:text="300" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/label_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/id"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="@+id/id"
+                app:layout_constraintStart_toStartOf="@+id/id"
+                app:layout_constraintTop_toBottomOf="@+id/id" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/label_height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/height"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="@+id/height_unit"
+                app:layout_constraintStart_toStartOf="@+id/height"
+                app:layout_constraintTop_toTopOf="@+id/label_id" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/label_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/weight"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="@+id/weight_unit"
+                app:layout_constraintStart_toStartOf="@+id/weight"
+                app:layout_constraintTop_toTopOf="@+id/label_height" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/label_base_experience"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/base_experience"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="@+id/base_experience"
+                app:layout_constraintStart_toStartOf="@+id/base_experience"
+                app:layout_constraintTop_toTopOf="@+id/label_weight" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/label_types"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/types"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:textStyle="italic"
+                app:layout_constraintBaseline_toBaselineOf="@+id/types"
+                app:layout_constraintBottom_toBottomOf="@+id/types"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/types"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/label_types"
+                app:layout_constraintTop_toBottomOf="@+id/label_id"
+                tools:text="normal, fly" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/label_abilities"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/abilities"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:textStyle="italic"
+                app:layout_constraintBaseline_toBaselineOf="@+id/abilities"
+                app:layout_constraintBottom_toBottomOf="@+id/abilities"
+                app:layout_constraintStart_toStartOf="@+id/label_types" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/abilities"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
+                app:layout_constraintEnd_toEndOf="@+id/types"
+                app:layout_constraintStart_toEndOf="@+id/label_abilities"
+                app:layout_constraintTop_toBottomOf="@+id/types"
+                tools:text="normal, fly" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</ScrollView>

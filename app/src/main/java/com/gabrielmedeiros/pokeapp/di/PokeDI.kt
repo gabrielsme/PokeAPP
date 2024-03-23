@@ -4,8 +4,9 @@ import com.gabrielmedeiros.pokeapp.data.pagination.ListPokemonPagingSource
 import com.gabrielmedeiros.pokeapp.data.repository.PokeRepository
 import com.gabrielmedeiros.pokeapp.data.repository.PokeRepositoryImpl
 import com.gabrielmedeiros.pokeapp.data.source.ApiRemoteDataSource
+import com.gabrielmedeiros.pokeapp.domain.usecase.GetPokemonByUrlUseCase
 import com.gabrielmedeiros.pokeapp.domain.usecase.GetPokemonListUseCase
-import com.gabrielmedeiros.pokeapp.ui.main.listpokemons.ListPokemonViewModel
+import com.gabrielmedeiros.pokeapp.ui.main.MainViewModel
 import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import org.koin.androidx.viewmodel.dsl.viewModelOf
@@ -19,11 +20,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 private const val BASE_URL = "https://pokeapi.co/api/v2/"
 
 private val viewModelModule = module {
-    viewModelOf(::ListPokemonViewModel)
+    viewModelOf(::MainViewModel)
 }
 
 private val domainModule = module {
     factoryOf(::GetPokemonListUseCase)
+    factoryOf(::GetPokemonByUrlUseCase)
 }
 
 private val dataModule = module {

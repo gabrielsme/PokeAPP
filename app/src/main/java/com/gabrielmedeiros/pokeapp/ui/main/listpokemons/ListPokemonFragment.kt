@@ -13,15 +13,16 @@ import com.gabrielmedeiros.pokeapp.R
 import com.gabrielmedeiros.pokeapp.data.model.ListPokemonModel
 import com.gabrielmedeiros.pokeapp.databinding.FragmentListPokemonBinding
 import com.gabrielmedeiros.pokeapp.ui.main.MainActivity
+import com.gabrielmedeiros.pokeapp.ui.main.MainViewModel
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 private const val COLUMN_COUNT = 2
 
 class ListPokemonFragment : Fragment(R.layout.adapter_list_pokemon) {
 
     private var binding: FragmentListPokemonBinding? = null
-    private val viewModel by viewModel<ListPokemonViewModel>()
+    private val viewModel by activityViewModel<MainViewModel>()
 
     private var adapter: ListPokemonAdapter? = null
 
@@ -56,7 +57,7 @@ class ListPokemonFragment : Fragment(R.layout.adapter_list_pokemon) {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { uiState ->
-                    uiState.pokemons?.let { pokemons ->
+                    uiState.listPokemons?.let { pokemons ->
                         adapter?.submitData(pokemons)
                     }
                 }
@@ -65,11 +66,8 @@ class ListPokemonFragment : Fragment(R.layout.adapter_list_pokemon) {
     }
 
     private fun onClickPokemonItem(pokemon: ListPokemonModel) {
+        viewModel.getPokemonByUrl(pokemon.url)
         (activity as MainActivity).openPane()
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance() = ListPokemonFragment()
-    }
 }
