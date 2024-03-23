@@ -19,4 +19,6 @@ class MainActivity : AppCompatActivity() {
     fun openPane() {
         binding.slidingPane.openPane()
     }
+
+    fun getSlidingPane() = binding.slidingPane
 }

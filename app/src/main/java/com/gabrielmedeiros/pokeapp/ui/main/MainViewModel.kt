@@ -2,6 +2,7 @@ package com.gabrielmedeiros.pokeapp.ui.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
 import com.gabrielmedeiros.pokeapp.domain.usecase.GetPokemonByUrlUseCase
 import com.gabrielmedeiros.pokeapp.domain.usecase.GetPokemonListUseCase
 import com.gabrielmedeiros.pokeapp.ui.main.listpokemons.ListPokemonUiState
@@ -24,7 +25,7 @@ class MainViewModel(
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
 
-            getPokemonListUseCase().collectLatest { result ->
+            getPokemonListUseCase().cachedIn(viewModelScope).collectLatest { result ->
                 _uiState.update { it.copy(listPokemons = result, isLoading = false) }
             }
         }

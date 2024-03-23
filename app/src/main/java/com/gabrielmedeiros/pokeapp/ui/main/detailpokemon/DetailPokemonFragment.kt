@@ -11,7 +11,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import coil.load
 import com.gabrielmedeiros.pokeapp.R
 import com.gabrielmedeiros.pokeapp.databinding.FragmentDetailPokemonBinding
+import com.gabrielmedeiros.pokeapp.ui.main.MainActivity
 import com.gabrielmedeiros.pokeapp.ui.main.MainViewModel
+import com.gabrielmedeiros.pokeapp.ui.main.ListOnBackPressedCallback
 import com.gabrielmedeiros.pokeapp.util.extension.capitalize
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
@@ -32,6 +34,12 @@ class DetailPokemonFragment : Fragment(R.layout.fragment_detail_pokemon) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val slidingPaneLayout = (activity as MainActivity).getSlidingPane()
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            ListOnBackPressedCallback(slidingPaneLayout)
+        )
 
         setupObservers()
     }
