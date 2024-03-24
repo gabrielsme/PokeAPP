@@ -10,7 +10,8 @@ data class PokemonModel(
     val weight: Int,
     @SerializedName("base_experience") val baseExperience: Int,
     val abilities: List<Ability>,
-    val types: List<Type>
+    val types: List<Type>,
+    var isFavorite: Boolean = false
 ) {
     fun getImageUrl() = getPokemonImageUrl(id.toString())
 

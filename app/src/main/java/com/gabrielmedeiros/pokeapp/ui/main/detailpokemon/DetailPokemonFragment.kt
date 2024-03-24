@@ -11,9 +11,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import coil.load
 import com.gabrielmedeiros.pokeapp.R
 import com.gabrielmedeiros.pokeapp.databinding.FragmentDetailPokemonBinding
+import com.gabrielmedeiros.pokeapp.ui.main.ListOnBackPressedCallback
 import com.gabrielmedeiros.pokeapp.ui.main.MainActivity
 import com.gabrielmedeiros.pokeapp.ui.main.MainViewModel
-import com.gabrielmedeiros.pokeapp.ui.main.ListOnBackPressedCallback
 import com.gabrielmedeiros.pokeapp.util.extension.capitalize
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
@@ -41,6 +41,7 @@ class DetailPokemonFragment : Fragment(R.layout.fragment_detail_pokemon) {
             ListOnBackPressedCallback(slidingPaneLayout)
         )
 
+        setupEvents()
         setupObservers()
     }
 
@@ -64,9 +65,24 @@ class DetailPokemonFragment : Fragment(R.layout.fragment_detail_pokemon) {
                             baseExperience.text = pokemon.baseExperience.toString()
                             types.text = pokemon.getAllTypes()
                             abilities.text = pokemon.getAllAbilities()
+                            favorite.isSelected = pokemon.isFavorite
                         }
                     }
                 }
+            }
+        }
+    }
+
+    private fun setupEvents() {
+        binding?.favorite?.setOnClickListener {
+            binding?.favorite?.isSelected?.let { isSelected ->
+                if (isSelected) {
+                    viewModel.removeFavoritePokemon()
+                } else {
+                    viewModel.saveFavoritePokemon()
+                }
+
+                binding?.favorite?.isSelected = !isSelected
             }
         }
     }

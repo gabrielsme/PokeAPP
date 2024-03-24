@@ -1,11 +1,15 @@
 package com.gabrielmedeiros.pokeapp.di
 
 import com.gabrielmedeiros.pokeapp.data.pagination.ListPokemonPagingSource
+import com.gabrielmedeiros.pokeapp.data.repository.DataStoreRepository
+import com.gabrielmedeiros.pokeapp.data.repository.DataStoreRepositoryImpl
 import com.gabrielmedeiros.pokeapp.data.repository.PokeRepository
 import com.gabrielmedeiros.pokeapp.data.repository.PokeRepositoryImpl
 import com.gabrielmedeiros.pokeapp.data.source.ApiRemoteDataSource
 import com.gabrielmedeiros.pokeapp.domain.usecase.GetPokemonByUrlUseCase
 import com.gabrielmedeiros.pokeapp.domain.usecase.GetPokemonListUseCase
+import com.gabrielmedeiros.pokeapp.domain.usecase.RemoveFavoritePokemonUseCase
+import com.gabrielmedeiros.pokeapp.domain.usecase.SaveFavoritePokemonUseCase
 import com.gabrielmedeiros.pokeapp.ui.main.MainViewModel
 import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
@@ -26,10 +30,13 @@ private val viewModelModule = module {
 private val domainModule = module {
     factoryOf(::GetPokemonListUseCase)
     factoryOf(::GetPokemonByUrlUseCase)
+    factoryOf(::SaveFavoritePokemonUseCase)
+    factoryOf(::RemoveFavoritePokemonUseCase)
 }
 
 private val dataModule = module {
     singleOf(::PokeRepositoryImpl) { bind<PokeRepository>() }
+    singleOf(::DataStoreRepositoryImpl) { bind<DataStoreRepository>() }
     singleOf(::ListPokemonPagingSource)
 }
 
