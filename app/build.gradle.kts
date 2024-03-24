@@ -46,9 +46,10 @@ dependencies {
     implementation("androidx.slidingpanelayout:slidingpanelayout:1.2.0")
     implementation("androidx.paging:paging-runtime-ktx:3.2.1")
     implementation("androidx.datastore:datastore-preferences:1.0.0")
-    implementation("com.google.android.material:material:1.11.0")
 
+    implementation("com.google.android.material:material:1.11.0")
     implementation("com.google.code.gson:gson:2.10.1")
+
     implementation("io.insert-koin:koin-android:3.5.3")
     implementation("com.squareup.retrofit2:retrofit:2.10.0")
     implementation("com.squareup.retrofit2:converter-gson:2.10.0")
